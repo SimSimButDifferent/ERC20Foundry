@@ -155,10 +155,10 @@ contract DeploymentConfigTest is Test {
         assertEq(networkConfig.initialSupply, 1000000 ether);
     }
 
-    function testBaseTestnetConfig() public {
-        vm.chainId(1338);
-        vm.setEnv("BASE_TESTNET_PRIVATE_KEY", "4321");
-        vm.setEnv("BASE_TESTNET_TOKEN_RECEIVER", "0x2345678901234567890123456789012345678901");
+    function testBaseSepoliaConfig() public {
+        vm.chainId(84532);
+        vm.setEnv("BASE_SEPOLIA_PRIVATE_KEY", "4321");
+        vm.setEnv("BASE_SEPOLIA_TOKEN_RECEIVER", "0x2345678901234567890123456789012345678901");
 
         DeploymentConfig.NetworkConfig memory networkConfig = config.getNetworkConfig();
 
@@ -168,7 +168,7 @@ contract DeploymentConfigTest is Test {
     }
 
     function testZkSyncMainnetConfig() public {
-        vm.chainId(3125659152);
+        vm.chainId(324);
         vm.setEnv("ZKSYNC_MAINNET_PRIVATE_KEY", "8765");
         vm.setEnv("ZKSYNC_MAINNET_TOKEN_RECEIVER", "0x4567890123456789012345678901234567890123");
 
@@ -179,10 +179,10 @@ contract DeploymentConfigTest is Test {
         assertEq(networkConfig.initialSupply, 1000000 ether);
     }
 
-    function testZkSyncTestnetConfig() public {
-        vm.chainId(3125659153);
-        vm.setEnv("ZKSYNC_TESTNET_PRIVATE_KEY", "7654");
-        vm.setEnv("ZKSYNC_TESTNET_TOKEN_RECEIVER", "0x5678901234567890123456789012345678901234");
+    function testZkSyncSepoliaConfig() public {
+        vm.chainId(300);
+        vm.setEnv("ZKSYNC_SEPOLIA_PRIVATE_KEY", "7654");
+        vm.setEnv("ZKSYNC_SEPOLIA_TOKEN_RECEIVER", "0x5678901234567890123456789012345678901234");
 
         DeploymentConfig.NetworkConfig memory networkConfig = config.getNetworkConfig();
 
