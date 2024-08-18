@@ -15,3 +15,5 @@ docs/
 
 # Foundry Library
 /lib/
+
+lcov.info

@@ -12,37 +12,37 @@ contract DeploymentConfig is Script {
 
     NetworkConfig public activeNetworkConfig;
 
-    constructor() {
+    function getNetworkConfig() public view returns (NetworkConfig memory) {
         if (block.chainid == 1) {
-            activeNetworkConfig = getEthereumMainnetConfig();
+            return getEthereumMainnetConfig();
         } else if (block.chainid == 11155111) {
-            activeNetworkConfig = getEthereumSepoliaConfig();
+            return getEthereumSepoliaConfig();
         } else if (block.chainid == 137) {
-            activeNetworkConfig = getMaticMainnetConfig();
+            return getMaticMainnetConfig();
         } else if (block.chainid == 1101) {
-            activeNetworkConfig = getMaticZkEVMMainnetConfig();
+            return getMaticZkEVMMainnetConfig();
         } else if (block.chainid == 1442) {
-            activeNetworkConfig = getMaticZkEVMTestnetConfig();
+            return getMaticZkEVMTestnetConfig();
         } else if (block.chainid == 56) {
-            activeNetworkConfig = getBNBSmartChainMainnetConfig();
+            return getBNBSmartChainMainnetConfig();
         } else if (block.chainid == 97) {
-            activeNetworkConfig = getBNBSmartChainSepoliaConfig();
+            return getBNBSmartChainTestnetConfig();
         } else if (block.chainid == 43114) {
-            activeNetworkConfig = getAvalancheCChainConfig();
+            return getAvalancheCChainConfig();
         } else if (block.chainid == 43113) {
-            activeNetworkConfig = getAvalancheSepoliaConfig();
+            return getAvalancheFujiConfig();
         } else if (block.chainid == 42161) {
-            activeNetworkConfig = getArbitrumMainnetConfig();
+            return getArbitrumMainnetConfig();
         } else if (block.chainid == 421614) {
-            activeNetworkConfig = getArbitrumSepoliaConfig();
+            return getArbitrumSepoliaConfig();
         } else if (block.chainid == 8453) {
-            activeNetworkConfig = getBaseMainnetConfig();
+            return getBaseMainnetConfig();
         } else if (block.chainid == 84532) {
-            activeNetworkConfig = getBaseSepoliaConfig();
+            return getBaseSepoliaConfig();
         } else if (block.chainid == 324) {
-            activeNetworkConfig = getZkSyncMainnetConfig();
+            return getZkSyncMainnetConfig();
         } else if (block.chainid == 300) {
-            activeNetworkConfig = getZkSyncSepoliaConfig();
+            return getZkSyncSepoliaConfig();
         } else {
             revert("Unsupported network");
         }
@@ -82,8 +82,8 @@ contract DeploymentConfig is Script {
 
     function getMaticZkEVMTestnetConfig() internal view returns (NetworkConfig memory) {
         return NetworkConfig({
-            deployerPrivateKey: vm.envUint("MATIC_ZKEVM_SEPOLIA_PRIVATE_KEY"),
-            tokenReceiver: vm.envAddress("MATIC_ZKEVM_SEPOLIA_TOKEN_RECEIVER"),
+            deployerPrivateKey: vm.envUint("MATIC_ZKEVM_TESTNET_PRIVATE_KEY"),
+            tokenReceiver: vm.envAddress("MATIC_ZKEVM_TESTNET_TOKEN_RECEIVER"),
             initialSupply: 1000000 ether
         });
     }
@@ -96,10 +96,10 @@ contract DeploymentConfig is Script {
         });
     }
 
-    function getBNBSmartChainSepoliaConfig() internal view returns (NetworkConfig memory) {
+    function getBNBSmartChainTestnetConfig() internal view returns (NetworkConfig memory) {
         return NetworkConfig({
-            deployerPrivateKey: vm.envUint("BNB_SEPOLIA_PRIVATE_KEY"),
-            tokenReceiver: vm.envAddress("BNB_SEPOLIA_TOKEN_RECEIVER"),
+            deployerPrivateKey: vm.envUint("BNB_TESTNET_PRIVATE_KEY"),
+            tokenReceiver: vm.envAddress("BNB_TESTNET_TOKEN_RECEIVER"),
             initialSupply: 1000000 ether
         });
     }
@@ -112,10 +112,10 @@ contract DeploymentConfig is Script {
         });
     }
 
-    function getAvalancheSepoliaConfig() internal view returns (NetworkConfig memory) {
+    function getAvalancheFujiConfig() internal view returns (NetworkConfig memory) {
         return NetworkConfig({
-            deployerPrivateKey: vm.envUint("AVAX_SEPOLIA_PRIVATE_KEY"),
-            tokenReceiver: vm.envAddress("AVAX_SEPOLIA_TOKEN_RECEIVER"),
+            deployerPrivateKey: vm.envUint("AVAX_FUJI_PRIVATE_KEY"),
+            tokenReceiver: vm.envAddress("AVAX_FUJI_TOKEN_RECEIVER"),
             initialSupply: 1000000 ether
         });
     }

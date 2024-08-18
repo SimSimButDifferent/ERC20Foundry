@@ -8,15 +8,16 @@ import {DeploymentConfig} from "./DeploymentConfig.sol";
 contract DeployERC20 is Script {
     function run() public returns (ERC20Token) {
         DeploymentConfig config = new DeploymentConfig();
-        DeploymentConfig.NetworkConfig memory networkConfig = config.activeNetworkConfig();
+        DeploymentConfig.NetworkConfig memory networkConfig = config.getNetworkConfig();
 
         vm.startBroadcast(networkConfig.deployerPrivateKey);
 
         ERC20Token erc20 = new ERC20Token(networkConfig.initialSupply);
         erc20.transfer(networkConfig.tokenReceiver, networkConfig.initialSupply);
-
+ 
         vm.stopBroadcast();
 
+        console.log("Deploying ERC20Token with initial supply:", networkConfig.initialSupply);
         console.log("ERC20Token deployed at:", address(erc20));
         console.log("Tokens transferred to:", networkConfig.tokenReceiver);
         console.log("Network Chain ID:", block.chainid);
