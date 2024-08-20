@@ -1,4 +1,4 @@
-# ERC20 Token Deployment Project
+# ERC20 Token Deployment Using Foundry
 
 This project demonstrates how to create and deploy a simple ERC20 token using Foundry, a powerful toolkit for Ethereum application development.
 
