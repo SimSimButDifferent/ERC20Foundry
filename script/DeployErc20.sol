@@ -7,14 +7,12 @@ import {ERC20Token} from "../src/ERC20Token.sol";
 contract DeployERC20 is Script {
 
     uint256 public constant initialSupply = 1000000 ether;
-    
 
     function run() public returns (ERC20Token) {
 
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY"); 
-        address tokenReceiver = vm.envAddress("TOKEN_RECEIVER");
+        vm.startBroadcast();
 
-        vm.startBroadcast(deployerPrivateKey);
+        address tokenReceiver = vm.envAddress("TOKEN_RECEIVER");
 
         ERC20Token erc20 = new ERC20Token(initialSupply);
         erc20.transfer(tokenReceiver, initialSupply);
