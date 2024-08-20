@@ -1,66 +1,99 @@
-## Foundry
+# ERC20 Token Deployment Project
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This project demonstrates how to create and deploy a simple ERC20 token using Foundry, a powerful toolkit for Ethereum application development.
 
-Foundry consists of:
+## Overview
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+This project includes:
+- An ERC20 token contract
+- A deployment script for easy token deployment
+- Configuration for multiple networks (including Ethereum testnets)
 
-## Documentation
+## Prerequisites
 
-https://book.getfoundry.sh/
+Before you begin, ensure you have the following installed:
+- [Foundry](https://book.getfoundry.sh/getting-started/installation)
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-## Usage
+## Installation
 
-### Build
+1. Clone the repository:
+   ```
+   git clone https://github.com/your-username/erc20foundry.git
+   cd erc20foundry
+   ```
 
-```shell
-$ forge build
+2. Install dependencies:
+   ```
+   forge install
+   ```
+
+## Configuration
+
+1. Create a `.env` file in the root directory with the following contents:
+   ```
+   PRIVATE_KEY=your_private_key_here_without_0x_prefix
+   TOKEN_RECEIVER=0x_address_to_receive_initial_tokens
+   RPC_URL=https://your-rpc-url
+   ETHERSCAN_API_KEY=your-etherscan-api-key
+   ```
+   Replace the values with your actual private key, token receiver address, and RPC URL.
+
+2. Load the environment variables:
+   ```
+   source .env
+   ```
+
+## Compilation
+
+Compile the contracts:
+
+```
+forge build
 ```
 
-### Test
+## Testing
 
-```shell
-$ forge test
+Run the tests:
+
+```
+forge test -vvv
 ```
 
-### Format
+## Deployment
 
-```shell
-$ forge fmt
+To deploy the ERC20 token:
+
+```
+forge script script/DeployErc20.sol:DeployERC20 --rpc-url $RPC_URL --private-key $PRIVATE_KEY --etherscan-api-key $ETHERSCAN_API_KEY --broadcast --verify -vvvv
 ```
 
-### Gas Snapshots
+This command will:
+- Deploy the ERC20 token contract
+- Transfer the initial supply to the specified receiver address
+- Verify the contract on Etherscan (if supported by the network)
 
-```shell
-$ forge snapshot
-```
+## Contract Details
 
-### Anvil
+- Token Name: "TokenName"
+- Token Symbol: "MyToken"
+- Initial Supply: 1,000,000 tokens
 
-```shell
-$ anvil
-```
+You can modify these details in the `ERC20Token.sol` file.
 
-### Deploy
+## Networks
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+This project is configured to work with multiple networks, including Ethereum testnets like Sepolia. Ensure you have the correct RPC URL in your `.env` file for the network you want to deploy to.
 
-### Cast
+## Security
 
-```shell
-$ cast <subcommand>
-```
+- Never commit your `.env` file or expose your private keys.
+- Ensure you're using a dedicated testnet account for development and testing.
 
-### Help
+## Contributing
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License.
