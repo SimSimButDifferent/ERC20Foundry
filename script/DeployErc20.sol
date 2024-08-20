@@ -1,26 +1,30 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {Script, console} from "forge-std/Script.sol";
+import {Script, console2} from "forge-std/Script.sol";
 import {ERC20Token} from "../src/ERC20Token.sol";
-import {DeploymentConfig} from "./DeploymentConfig.sol";
 
 contract DeployERC20 is Script {
+
+    uint256 public constant initialSupply = 1000000 ether;
+    
+
     function run() public returns (ERC20Token) {
-        DeploymentConfig config = new DeploymentConfig();
-        DeploymentConfig.NetworkConfig memory networkConfig = config.getNetworkConfig();
 
-        vm.startBroadcast(networkConfig.deployerPrivateKey);
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY"); 
+        address tokenReceiver = vm.envAddress("TOKEN_RECEIVER");
 
-        ERC20Token erc20 = new ERC20Token(networkConfig.initialSupply);
-        erc20.transfer(networkConfig.tokenReceiver, networkConfig.initialSupply);
+        vm.startBroadcast(deployerPrivateKey);
+
+        ERC20Token erc20 = new ERC20Token(initialSupply);
+        erc20.transfer(tokenReceiver, initialSupply);
  
         vm.stopBroadcast();
 
-        console.log("Deploying ERC20Token with initial supply:", networkConfig.initialSupply);
-        console.log("ERC20Token deployed at:", address(erc20));
-        console.log("Tokens transferred to:", networkConfig.tokenReceiver);
-        console.log("Network Chain ID:", block.chainid);
+        console2.log("Deploying ERC20Token with initial supply:", initialSupply);
+        console2.log("ERC20Token deployed at:", address(erc20));
+        console2.log("Tokens transferred to:", tokenReceiver);
+        console2.log("Network Chain ID:", block.chainid);
 
         return erc20;
     }

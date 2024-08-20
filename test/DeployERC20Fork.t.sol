@@ -12,7 +12,7 @@ contract DeployERC20ForkTest is Test {
 
     function setUp() public {
         // Fork Ethereum mainnet
-        vm.createSelectFork(vm.envString("ETH_MAINNET_RPC_URL"));
+        vm.createSelectFork(vm.envString("RPC_URL"));
         
         // Set up the deployer
         deployer = new DeployERC20();
@@ -21,8 +21,8 @@ contract DeployERC20ForkTest is Test {
         tokenReceiver = makeAddr("tokenReceiver");
 
         // Set environment variables for the test
-        vm.setEnv("ETHEREUM_MAINNET_PRIVATE_KEY", "1234"); // Use a dummy private key for testing
-        vm.setEnv("ETHEREUM_MAINNET_TOKEN_RECEIVER", vm.toString(tokenReceiver));
+        vm.setEnv("PRIVATE_KEY", "1234"); // Use a dummy private key for testing
+        vm.setEnv("TOKEN_RECEIVER", vm.toString(tokenReceiver));
     }
 
     function testDeployOnFork() public {
@@ -41,6 +41,6 @@ contract DeployERC20ForkTest is Test {
         assertEq(token.totalSupply(), 1000000 ether, "Incorrect total supply");
         
         // Check that the chain ID is correct for Ethereum mainnet
-        assertEq(block.chainid, 1, "Not forked to Ethereum mainnet");
+        assertEq(block.chainid, 11155111, "Not forked to Sepolia testnet");
     }
 }

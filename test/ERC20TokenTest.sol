@@ -16,7 +16,7 @@ contract ERC20TokenTest is Test {
         token = new ERC20Token(INITIAL_SUPPLY);
     }
 
-    function testInitialSupply() public {
+    function testInitialSupply() public view {
         assertEq(token.totalSupply(), INITIAL_SUPPLY);
         assertEq(token.balanceOf(owner), INITIAL_SUPPLY);
         console.log("Initial supply minted to owner:", token.balanceOf(owner));
