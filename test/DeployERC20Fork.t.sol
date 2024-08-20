@@ -36,8 +36,8 @@ contract DeployERC20ForkTest is Test {
         assertEq(token.balanceOf(tokenReceiver), 1000000 ether, "Incorrect token balance for receiver");
         
         // Check token details
-        assertEq(token.name(), "TokenName", "Incorrect token name");
-        assertEq(token.symbol(), "MyToken", "Incorrect token symbol");
+        assertEq(token.name(), "SimsTestToken", "Incorrect token name");
+        assertEq(token.symbol(), "SIM", "Incorrect token symbol");
         assertEq(token.totalSupply(), 1000000 ether, "Incorrect total supply");
         
         // Check that the chain ID is correct for Ethereum mainnet
